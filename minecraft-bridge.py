@@ -47,7 +47,9 @@ if __name__ == "__main__":
             
             #Is the block below the next player pos air, if so fill it in with DIAMOND
             blockBelowPos = roundVec3(nextPlayerPos)
-            blockBelowPos.z = blockBelowPos.z - 1
+            #to resolve issues with negative positions
+            if blockBelowPos.z < 0: blockBelowPos.z = blockBelowPos.z - 1
+            if blockBelowPos.x < 0: blockBelowPos.x = blockBelowPos.x - 1
             blockBelowPos.y = blockBelowPos.y - 1
             if mc.getBlock(blockBelowPos) == block.AIR:
                 mc.setBlock(blockBelowPos.x, blockBelowPos.y, blockBelowPos.z, block.DIAMOND_BLOCK)
